@@ -1,0 +1,77 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="mybatis/generator/generator-config.properties"/>
+
+    <!-- 一个数据库对应一个context -->
+    <!-- targetRuntime="MyBatis3Simple" 直接拒绝 table下的 *ByExample -->
+    <context id="alpaca.generator" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <plugin type="${symbol_dollar}{plugin.name}">
+            <property name="mappers" value="${symbol_dollar}{plugin.mappers}" />
+            <property name="ORDER" value="BEFORE" />
+        </plugin>
+
+        <commentGenerator type="${symbol_dollar}{comment.generator}">
+            <property name="suppressAllComments" value="false" />
+            <property name="addRemarkComments" value="true" />
+        </commentGenerator>
+
+        <!-- jdbc url地址  -->
+        <jdbcConnection
+                driverClass="${symbol_dollar}{jdbc.connection.driver-class-name}"
+                connectionURL="${symbol_dollar}{jdbc.connection.connection-url}"
+                userId="${symbol_dollar}{jdbc.connection.username}"
+                password="${symbol_dollar}{jdbc.connection.password}">
+            <property name="remarksReporting" value="true" />
+        </jdbcConnection>
+
+        <!-- 类型转换 -->
+        <!--
+          false This is the default value
+          When the property is false or unspecified, the default Java type resolver will attempt to make JDBC DECIMAL and NUMERIC types easier to work with by substituting Integral types if possible. The substitution rules are as follows:
+          If the scale is greater then zero, or the length is greater than 18, then the java.math.BigDecimal type will be used
+          If the scale is zero, and the length is 10 through 18, then the Java type resolver will substitute a java.lang.Long.
+          If the scale is zero, and the length is 5 through 9, then the Java type resolver will substitute a java.lang.Integer.
+          If the scale is zero, and the length is less than 5, then the Java type resolver will substitute a java.lang.Short.
+         -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!-- 生成实体类 -->
+        <javaModelGenerator targetPackage="${symbol_dollar}{generator.model.target-package}" targetProject="${symbol_dollar}{project.java.path}">
+        </javaModelGenerator>
+
+        <!-- 生成*Mapper.xml -->
+        <sqlMapGenerator targetPackage="${symbol_dollar}{generator.sqlmap.target-package}" targetProject="${symbol_dollar}{project.resources.path}">
+        </sqlMapGenerator>
+
+        <!-- 生成*Mapper.java -->
+        <javaClientGenerator targetPackage="${symbol_dollar}{generator.mapper.target-package}" targetProject="${symbol_dollar}{project.java.path}" type="XMLMAPPER">
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+        <!--<table schema="" tableName="SYS_USER" domainObjectName="User">-->
+            <!--<generatedKey column="ID" sqlStatement="select SEQ_SYS_USER_ID.nextval from dual" />-->
+            <!--<ignoreColumn column="IGNORE_COLUMN" />-->
+            <!--<columnOverride column="TYPE_DOUBLE" javaType="Double"></columnOverride>-->
+        <!--</table>-->
+
+        <table tableName="AP_ACCOUNT" domainObjectName="Account">
+            <generatedKey column="ID" sqlStatement="select SEQ_{1}.nextval from dual" />
+            <columnOverride column="LOCKED" javaType="Boolean" jdbcType="VARCHAR"></columnOverride>
+            <columnOverride column="EXPIRED" javaType="Boolean" jdbcType="VARCHAR"></columnOverride>
+            <columnOverride column="ENABLED" javaType="Boolean" jdbcType="VARCHAR"></columnOverride>
+        </table>
+
+    </context>
+</generatorConfiguration>

@@ -1,0 +1,73 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+# 配置说明
+# mapper.before=true 使用Oracle序列的时候开启
+# pagehelper.offset-as-page-num 默认值为 false，该参数对使用 RowBounds 作为分页参数时有效。
+# 当该参数设置为 true 时，会将 RowBounds 中的 offset 参数当成 pageNum 使用，
+# 可以用页码和页面大小两个参数进行分页。 第几页，每页多少条。
+# 服务续约
+# 定于服务续约任务的调用间隔时间，默认30秒
+# eureka.instance.lease-renewal-interval-in-seconds=30
+# 用于定义服务失效的时间，默认90秒
+# eureka.instance.lease-expiration-duration-in-seconds=90
+
+spring:
+  datasource:
+    url: jdbc:oracle:thin:@10.188.180.141:1521:hsmis
+    username: bi
+    password: bi
+    driver-class-name: oracle.jdbc.OracleDriver
+    druid:
+      initial-size: 1
+      min-idle: 1
+      max-active: 5
+      test-on-borrow: true
+      stat-view-servlet.allow: true
+  data:
+    jpa:
+      repositories:
+        enabled: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: always
+mybatis:
+  type-aliases-package: ${package}.entity
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+  type-handlers-package: alpaca.park.mybatis.type
+  configuration:
+    vfs-impl: org.mybatis.spring.boot.autoconfigure.SpringBootVFS
+mapper:
+  mappers: alpaca.park.common.AlpacaMapper
+  before: true
+  not-empty: false
+  identity: ORACLE
+pagehelper:
+  support-methods-arguments: true
+  helper-dialect: oracle
+  reasonable: true
+  offset-as-page-num: true
+  row-bounds-with-count: false
+
+security:
+  basic:
+    enabled: false
+#### eureka ####
+eureka:
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://127.0.0.1:8761/eureka/
+
+spring.zipkin.base-url: http://192.168.2.70:9411
+# 应取样比例的要求。如1.0 - 100%的请求应取样。精度是整数(即没有支持0.1%的痕迹)。
+spring.sleuth.sampler.percentage: 1.0
+spring.sleuth.rxjava.schedulers.hook.enabled: false
+logging:
+  file: ${user.home}/alpaca/log/${spring.application.name}.log
+  register-shutdown-hook: true
