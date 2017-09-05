@@ -69,5 +69,5 @@ spring.zipkin.base-url: http://192.168.2.70:9411
 spring.sleuth.sampler.percentage: 1.0
 spring.sleuth.rxjava.schedulers.hook.enabled: false
 logging:
-  file: ${user.home}/alpaca/log/${spring.application.name}.log
+  file: ${symbol_pound}{user.home}/alpaca/log/${symbol_pound}{spring.application.name}.log
   register-shutdown-hook: true

@@ -16,3 +16,7 @@ management:
   security:
     enabled: false
 
+swagger:
+  base-package: ${package}.controller
+  title: ${symbol_pound}{spring.application.name}
+  version: @project.version@

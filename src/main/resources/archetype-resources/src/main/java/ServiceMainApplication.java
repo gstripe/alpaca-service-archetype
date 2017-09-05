@@ -9,10 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
- * 账号服务
- *
+ * 服务
  * @author gstripe@gmail.com
  */
+@EnableSwagger2Doc
 @EnableDiscoveryClient
 @SpringBootApplication
 @MapperScan("${package}.mapper")
