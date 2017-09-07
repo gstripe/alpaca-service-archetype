@@ -12,8 +12,10 @@
         </root>
     </springProfile>
 
-    <springProperty scope="context" name="LOG_FILE" source="logging.file"/>
     <springProfile name="prod">
+        <springProperty scope="context" name="spring.application.name" source="spring.application.name"/>
+        <property name="LOG_FILE" value="${user.home}/alpaca/log/${spring.application.name}.log" />
+
         <include resource="alpaca/park/logging/logback/file-appender.xml" />
         <root level="INFO">
             <appender-ref ref="FILE"/>
