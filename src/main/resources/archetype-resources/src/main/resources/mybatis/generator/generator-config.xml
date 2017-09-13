@@ -56,8 +56,8 @@
         <!--</sqlMapGenerator>-->
 
         <!-- 生成*Mapper.java -->
-        <javaClientGenerator targetPackage="${symbol_dollar}{generator.mapper.target-package}" targetProject="${symbol_dollar}{project.java.path}" type="ANNOTATEDMAPPER">
-        </javaClientGenerator>
+        <!--<javaClientGenerator targetPackage="${symbol_dollar}{generator.mapper.target-package}" targetProject="${symbol_dollar}{project.java.path}" type="ANNOTATEDMAPPER">-->
+        <!--</javaClientGenerator>-->
 
         <!-- 配置表信息 -->
         <!--<table schema="" tableName="SYS_USER" domainObjectName="User">-->
