@@ -52,11 +52,11 @@
         </javaModelGenerator>
 
         <!-- 生成*Mapper.xml -->
-        <sqlMapGenerator targetPackage="${symbol_dollar}{generator.sqlmap.target-package}" targetProject="${symbol_dollar}{project.resources.path}">
-        </sqlMapGenerator>
+        <!--<sqlMapGenerator targetPackage="${symbol_dollar}{generator.sqlmap.target-package}" targetProject="${symbol_dollar}{project.resources.path}">-->
+        <!--</sqlMapGenerator>-->
 
         <!-- 生成*Mapper.java -->
-        <javaClientGenerator targetPackage="${symbol_dollar}{generator.mapper.target-package}" targetProject="${symbol_dollar}{project.java.path}" type="XMLMAPPER">
+        <javaClientGenerator targetPackage="${symbol_dollar}{generator.mapper.target-package}" targetProject="${symbol_dollar}{project.java.path}" type="ANNOTATEDMAPPER">
         </javaClientGenerator>
 
         <!-- 配置表信息 -->
